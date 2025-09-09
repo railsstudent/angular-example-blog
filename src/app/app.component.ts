@@ -1,13 +1,17 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  imports: [RouterOutlet, RouterLink],
+  template: `
+    <nav class="p-5 bg-green-400 text-white mb-10">
+      <a [routerLink]="['/']">
+        <span class="text-2xl">Snazzy Fake Blog</span>
+      </a>
+    </nav>
+    <router-outlet />
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  protected readonly title = signal('angular-example-blog');
-}
+export class AppComponent {}
