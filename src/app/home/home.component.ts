@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { PostcardComponent } from '../post/postcard/postcard.component';
+import { PostcardComponent } from '../post/postcard.component';
 import { PostsService } from '../post/services/posts.service';
 
 @Component({
