@@ -24,7 +24,7 @@ import { User } from './types/user.type';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostComponent {
+export default class PostComponent {
   post = input<Post>();
 
   user = signal<User>({

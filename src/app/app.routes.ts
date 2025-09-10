@@ -8,7 +8,7 @@ export const routes: Routes = [
     },
     {
         path: 'post/:id',
-        loadComponent: () => import('./post/post.component').then(m => m.PostComponent),
+        loadComponent: () => import('./post/post.component'),
         resolve: {
             post: postResolver
         }
