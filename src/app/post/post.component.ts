@@ -8,7 +8,8 @@ import { User } from './types/user.type';
     @reference "../../styles.css";
 
     :host {
-      @apply flex m-2  gap-2 items-center w-1/4 shadow-md flex-grow rounded overflow-hidden
+      @apply flex m-2  gap-2 items-center w-1/4 flex-grow rounded overflow-hidden
+      @apply w-full
     }
   `,
   template: `

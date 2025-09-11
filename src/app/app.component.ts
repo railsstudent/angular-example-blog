@@ -10,7 +10,15 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         <span class="text-2xl">Snazzy Fake Blog</span>
       </a>
     </nav>
-    <router-outlet />
+    <div class="container">
+      <router-outlet />
+    </div>
+  `,
+  styles: `
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
