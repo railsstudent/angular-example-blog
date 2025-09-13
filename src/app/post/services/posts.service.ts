@@ -1,7 +1,7 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { catchError, Observable, of } from 'rxjs';
 import { Post, postArraySchema } from '../types/post.type';
-import { Observable } from 'rxjs';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com/posts';
 
@@ -16,7 +16,12 @@ export class PostsService {
     parse: (value: unknown) => postArraySchema.parse(value),
   });
 
-  getPost(id: number): Observable<Post> {
-    return this.httpService.get<Post>(`${BASE_URL}/${id}`);
+  getPost(id: number): Observable<Post | undefined> {
+    return this.httpService.get<Post>(`${BASE_URL}/${id}`).pipe(
+      catchError((err) => {
+        console.error(err);
+        return of(undefined);
+      }),
+    );
   }
 }

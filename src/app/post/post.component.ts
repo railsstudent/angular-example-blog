@@ -14,12 +14,18 @@ import { Post } from './types/post.type';
   template: `
     @let myUser = user();
     @let myPost = post();
-    @if (myPost && myUser) {
+    @if (userRef.isLoading()) {
+      <div>Loading...</div>
+    } @else if (error()) {
+      <div>Error: {{ error() }}</div>
+    } @else if (myPost && myUser) {
       <div class="mb-10">
         <h1 class="text-3xl">{{ myPost.title }}</h1>
         <div class="text-gray-500 mb-10">by {{ myUser.name }}</div>
         <div class="mb-10">{{ myPost.body }}</div>
       </div>
+    } @else {
+      <div>Post not found</div>
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,4 +38,8 @@ export default class PostComponent {
   userRef = this.userService.createUserResource(this.post);
 
   user = computed(() => (this.userRef.hasValue() ? this.userRef.value() : undefined));
+
+  error = computed<string>(() =>
+    this.userRef.status() === 'error' ? 'Error loading the post.' : '',
+  );
 }
