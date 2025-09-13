@@ -7,7 +7,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   template: `
     <nav class="p-5 bg-green-400 text-white mb-10">
       <a [routerLink]="['/']">
-        <span class="text-2xl">Snazzy Fake Blog</span>
+        <span class="text-2xl">Snazzy Fake Blog (Angular 20 ver.)</span>
       </a>
     </nav>
     <div class="container">

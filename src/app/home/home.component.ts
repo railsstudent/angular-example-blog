@@ -19,5 +19,5 @@ export class HomeComponent {
 
   postsRes = this.postService.posts;
 
-  posts = computed(() => this.postsRes.hasValue() ? this.postsRes.value() : []);
+  posts = computed(() => (this.postsRes.hasValue() ? this.postsRes.value() : []));
 }

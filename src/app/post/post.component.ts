@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { UserService } from './services/user.service';
 import { Post } from './types/post.type';
-import { User } from './types/user.type';
 
 @Component({
   selector: 'app-post',
@@ -8,8 +8,7 @@ import { User } from './types/user.type';
     @reference "../../styles.css";
 
     :host {
-      @apply flex m-2  gap-2 items-center w-1/4 flex-grow rounded overflow-hidden
-      @apply w-full
+      @apply flex m-2  gap-2 items-center w-1/4 flex-grow rounded overflow-hidden w-full;
     }
   `,
   template: `
@@ -26,10 +25,11 @@ import { User } from './types/user.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class PostComponent {
+  readonly userService = inject(UserService);
+
   post = input<Post>();
 
-  user = signal<User>({
-    id: 1,
-    name: 'Connie',
-  });
+  userRef = this.userService.createUserResource(this.post);
+
+  user = computed(() => (this.userRef.hasValue() ? this.userRef.value() : undefined));
 }
