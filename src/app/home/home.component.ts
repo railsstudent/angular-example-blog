@@ -6,6 +6,11 @@ import { PostsService } from '../post/services/posts.service';
   selector: 'app-home',
   imports: [PostcardComponent],
   template: `
+    @if (postsRes.isLoading()) {
+      <div>Loading...</div>
+    } @else if (error()) {
+      <div>Error: {{ error() }}</div>
+    }
     <div class="flex flex-wrap flex-grow">
       @for (post of posts(); track post.id) {
         <app-postcard [post]="post" />
@@ -20,4 +25,8 @@ export class HomeComponent {
   postsRes = this.postService.posts;
 
   posts = computed(() => (this.postsRes.hasValue() ? this.postsRes.value() : []));
+
+  error = computed<string>(() =>
+    this.postsRes.status() === 'error' ? 'Error loading the posts.' : '',
+  );
 }
