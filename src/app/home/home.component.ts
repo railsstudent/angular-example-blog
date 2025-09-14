@@ -10,12 +10,15 @@ import { PostsService } from '../post/services/posts.service';
       <div>Loading...</div>
     } @else if (error()) {
       <div>Error: {{ error() }}</div>
-    }
+    } 
+    @if (posts(); as allPosts) {
     <div class="flex flex-wrap flex-grow">
-      @for (post of posts(); track post.id) {
+      <p class="ml-2 w-full">Number of posts: {{ allPosts.length }}</p>
+      @for (post of allPosts; track post.id) {
         <app-postcard [post]="post" />
       }
     </div>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
